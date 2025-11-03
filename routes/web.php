@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TiendaController; // Importamos nuestro controlador
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect; // 
 
 /*
 |--------------------------------------------------------------------------
