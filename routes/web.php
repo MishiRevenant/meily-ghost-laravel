@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TiendaController; // Importamos nuestro controlador
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect; // 
+use App\Http\Controllers\ProductoCrudController; // <-- ¡AÑADE ESTA LÍNEA!
 
 /*
 |--------------------------------------------------------------------------
