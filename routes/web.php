@@ -47,6 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // AÑADE ESTAS LÍNEAS DE AQUÍ
+    // Esto crea automáticamente todas las rutas para el CRUD (index, create, store, edit, update, destroy)
+    // y les pone el prefijo 'admin/' y el nombre 'productos.'
+    Route::prefix('admin')->name('productos.')->group(function () {
+        Route::resource('productos', ProductoCrudController::class);
+    });
+    // HASTA AQUÍ
 });
 
 require __DIR__.'/auth.php';

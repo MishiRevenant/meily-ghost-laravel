@@ -19,6 +19,25 @@
     <a href="{{ route('inspiracion') }}" class="{{ request()->routeIs('inspiracion') ? 'active' : '' }}"><i class="fas fa-lightbulb"></i><span>Inspiración</span></a>
     <a href="{{ route('acerca') }}" class="{{ request()->routeIs('acerca') ? 'active' : '' }}"><i class="fas fa-info-circle"></i><span>Acerca de</span></a>
     <a href="{{ route('contacto') }}" class="{{ request()->routeIs('contacto') ? 'active' : '' }}"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+    {{-- AÑADE ESTA LÓGICA DE AQUÍ --}}
+    @auth
+        {{-- Si el usuario está logueado --}}
+        <a href="{{ route('dashboard') }}"><i class="fas fa-user-shield"></i><span>Dashboard</span></a>
+        
+        {{-- Formulario para Logout --}}
+        <form method="POST" action="{{ route('logout') }}" style="display: contents;">
+            @csrf
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); this.closest('form').submit();">
+               <i class="fas fa-sign-out-alt"></i><span>Salir</span>
+            </a>
+        </form>
+    @else
+        {{-- Si el usuario es invitado --}}
+        <a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}"><i class="fas fa-sign-in-alt"></i><span>Login</span></a>
+        <a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}"><i class="fas fa-user-plus"></i><span>Registrarse</span></a>
+    @endauth
+    {{-- HASTA AQUÍ --}}
 </nav>
 
 <div class="content-wrapper">
