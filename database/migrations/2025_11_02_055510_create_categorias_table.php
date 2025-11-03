@@ -17,12 +17,9 @@ return new class extends Migration
         $table->timestamps();
     });
 }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('categorias');
-    }
+// Asegúrate de tener el método down() también
+public function down(): void
+{
+    Schema::dropIfExists('categorias');
+}
 };
