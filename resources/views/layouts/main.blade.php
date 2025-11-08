@@ -7,7 +7,7 @@
     {{-- La función asset() genera la URL correcta a la carpeta public --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {{-- Scripts de Vite (para Breeze) y tus estilos --}}
-+ @vite(['resources/css/app.css', 'resources/css/style.css'])</head>
+    @vite(['resources/css/app.css'])</head>
 <body class="font-sans antialiased">
 
 <nav id="sidebar" class="sidebar">
@@ -40,7 +40,7 @@
 
 <div class="content-wrapper">
     <header>
-        <img src="https://scontent.fcuz2-1.fna.fbcdn.net/v/t39.30808-6/468282342_586989107106293_9188685479668068517_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGqaBqQuSIFdrSGvSeCK_SngyhqWNOuwTqDKGpY067BOvLpiHjJtqPjYQUTvRZUJhLMmiFs40xKKr6rZNwmCsUw&_nc_ohc=3bEk8xeZqmYQ7kNvwGefWmA&_nc_oc=AdmmvKQnCo2mKYnal3r9CuTk6eUCw43GxIoC50uF6AZydtUGiJxEAeZAhZbh35Oj1dQ&_nc_zt=23&_nc_ht=scontent.fcuz2-1.fna&_nc_gid=2d1C21sehre24ha-Q3TTLw&oh=00_AfYTjjRgGKhTZebiABbwRUNgh62Jq5s0xd4jeQ6X4XglZA&oe=68DE986D" alt="Meily Ghost Logo">
+        <img src="https://scontent.fcuz2-1.fna.fbcdn.net/v/t39.30808-6/468179592_122102996726635106_5745478641582667610_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHVt_FllllmyBB5VlUhmO4gdseUeWaA-Gh2x5R5ZoD4aLMW9achCdVtVYkuKAG7UVVcdT0i6dhUkARw6sDMxivu&_nc_ohc=QvtAWQhtXkwQ7kNvwHVWxY4&_nc_oc=AdnAlL4J_Ox_QBwXVPFf7Utm0hq98dpit4YAMCgq83MGXdO2Btod6grjCdcIz9TChwE&_nc_zt=23&_nc_ht=scontent.fcuz2-1.fna&_nc_gid=6dfCk1yQ6JYFUhS2aS_KYA&oh=00_Afhl7ONrk5wAaG9GyeuFww-gkK35MpYGDFbWAx-Owtu0yA&oe=6914ACE3" alt="Meily Ghost Logo">
         <h1>@yield('header-title', 'Bienvenido a Meily Ghost')</h1>
         <p class="intro-coraline">@yield('header-subtitle', 'Creaciones únicas hechas a mano con un toque oscuro y encantador.')</p>
     </header>
@@ -55,7 +55,7 @@
 </div>
 
 {{-- Aquí se cargarán scripts específicos de cada página --}}
-@vite(['resources/js/sidebar.js'])
+@vite(['resources/js/app.js'])
 @stack('scripts')
 </body>
 </html>

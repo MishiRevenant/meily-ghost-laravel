@@ -31,4 +31,4 @@
     </div>
 </section>
 @endsection
-@vite('resources/js/tienda.js')
+@vite('resources/js/app.js')
