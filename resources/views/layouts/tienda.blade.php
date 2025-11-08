@@ -31,4 +31,3 @@
     </div>
 </section>
 @endsection
-@vite('resources/js/app.js')

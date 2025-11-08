@@ -32,7 +32,3 @@
 </section>
 @endsection
 
-@push('scripts')
-    {{-- Carga tu script de tienda.js desde la carpeta public --}}
-    <script src="{{ asset('tienda.js') }}"></script>
-@endpush
