@@ -7,7 +7,7 @@
     {{-- La función asset() genera la URL correcta a la carpeta public --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {{-- Scripts de Vite (para Breeze) y tus estilos --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">    
 </head>
 <body class="font-sans antialiased main-layout"> {{-- <-- AÑADE ESTA CLASE --}}
 
@@ -54,6 +54,8 @@
         &copy; {{ date('Y') }} Meily Ghost - Todos los derechos reservados
     </footer>
 </div>
-
-</body>
+<script src="{{ asset('js/slider.js') }}"></script>
+    <script src="{{ asset('js/sidebar.js') }}"></script>
+    
+    <script src="{{ asset('js/tienda.js') }}"></script></body>
 </html>
