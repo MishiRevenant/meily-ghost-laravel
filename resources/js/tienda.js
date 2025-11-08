@@ -21,3 +21,4 @@ function filterCat(categoria) {
         }
     });
 }
+window.filterCat = filterCat;

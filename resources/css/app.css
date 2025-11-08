@@ -1,4 +1,10 @@
+/* resources/css/app.css (Corregido) */
 @import './style.css';
+
 @tailwind base;
+
 @tailwind components;
+
+/* Importa tus estilos aquí, en medio */
+
 @tailwind utilities;

@@ -9,7 +9,7 @@
     {{-- Scripts de Vite (para Breeze) y tus estilos --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased main-layout"> {{-- <-- AÑADE ESTA CLASE --}}
 
 <nav id="sidebar" class="sidebar">
     {{-- La función route() busca una ruta por su nombre. Aún no las creamos, pero lo haremos. --}}

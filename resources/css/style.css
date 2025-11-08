@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:wght@400;700&family=IM+Fell+English+SC&display=swap');
 
-body {
-    background: radial-gradient(ellipse at top, #23253b 60%, #131224 100%);
+.main-layout {    background: radial-gradient(ellipse at top, #23253b 60%, #131224 100%);
     color: #e3e3e3;
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -10,8 +9,7 @@ body {
     transition: margin-left 0.3s;
 }
 
-body.sidebar-expanded {
-    margin-left: 180px;
+.main-layout.sidebar-expanded {    margin-left: 180px;
 }
 header {
     text-align: center;
