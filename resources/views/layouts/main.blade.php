@@ -7,7 +7,7 @@
     {{-- La función asset() genera la URL correcta a la carpeta public --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {{-- Scripts de Vite (para Breeze) y tus estilos --}}
-    @vite(['resources/css/app.css'])</head>
+    @vite(['resources/css/app.css'], ['resources/css/style.css'] )</head>
 <body class="font-sans antialiased">
 
 <nav id="sidebar" class="sidebar">
@@ -55,7 +55,7 @@
 </div>
 
 {{-- Aquí se cargarán scripts específicos de cada página --}}
-@vite(['resources/js/app.js'])
+@vite(['resources/js/app.js'],['resources/js/slider.js'],['resources/js/sidebar.js'])
 @stack('scripts')
 </body>
 </html>

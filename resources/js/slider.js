@@ -1,12 +1,37 @@
-let current = 0;
-const slides = document.querySelectorAll('.slide');
-document.getElementById('next').onclick = () => move(1);
-document.getElementById('prev').onclick = () => move(-1);
+// Espera a que todo el HTML esté cargado antes de ejecutar el script
+document.addEventListener('DOMContentLoaded', function() {
 
-function move(dir) {
-    slides[current].classList.remove('active');
-    current = (current + dir + slides.length) % slides.length;
-    slides[current].classList.add('active');
-}
-// Auto-slider
-setInterval(() => move(1), 5000);
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const nextButton = document.getElementById('next');
+    const prevButton = document.getElementById('prev');
+
+    // Función para mover el slide
+    function move(dir) {
+        // Oculta el slide actual
+        slides[current].classList.remove('active');
+        
+        // Calcula el nuevo slide
+        current = (current + dir + slides.length) % slides.length;
+        
+        // Muestra el nuevo slide
+        slides[current].classList.add('active');
+    }
+
+    // --- Código de ejecución ---
+    
+    // Solo si los elementos del slider existen en esta página
+    if (slides.length > 0 && nextButton && prevButton) {
+        
+        // 1. Asigna los clics a los botones
+        nextButton.onclick = () => move(1);
+        prevButton.onclick = () => move(-1);
+
+        // 2. Inicia el auto-slider
+        setInterval(() => move(1), 5000);
+
+        // 3. (Importante) Asegúrate de que el primer slide sea visible al cargar
+        slides[current].classList.add('active');
+    }
+
+});
