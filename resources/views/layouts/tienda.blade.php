@@ -31,7 +31,4 @@
     </div>
 </section>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('tienda.js') }}"></script> 
-@endpush
+@vite('resources/js/tienda.js')

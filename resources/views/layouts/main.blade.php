@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Meily Ghost')</title>
     {{-- La función asset() genera la URL correcta a la carpeta public --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {{-- Scripts de Vite (para Breeze) y tus estilos --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
++ @vite(['resources/css/app.css', 'resources/css/style.css'])</head>
 <body class="font-sans antialiased">
 
 <nav id="sidebar" class="sidebar">
@@ -56,8 +54,8 @@
     </footer>
 </div>
 
-<script src="{{ asset('sidebar.js') }}"></script>
 {{-- Aquí se cargarán scripts específicos de cada página --}}
+@vite(['resources/js/sidebar.js'])
 @stack('scripts')
 </body>
 </html>
