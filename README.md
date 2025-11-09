@@ -57,118 +57,149 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-Pasos para la Instalacion:
 
-🚀 Instalación (Desde Cero)
-Sigue estos pasos para levantar el proyecto en una máquina.
+<br>
+<p align="center">
+  <h1>Meily Ghost E-Commerce 👻</h1>
+</p>
 
-Prerrequisitos
+<p align="center">
+  Una tienda e-commerce de estilo gótico, victoriano y kawaii construida con Laravel 11, Sail y Vite.
+</p>
+
+---
+
+## 🚀 Instalación (Desde Cero)
+
+Sigue estos pasos para levantar el proyecto en una máquina nueva.
+
+### Prerrequisitos
+
 Asegúrate de tener instalado el siguiente software en tu sistema:
 
-Git
+* **Git**
+* **Docker Desktop** (para Mac/Windows) o **Docker Engine + Docker Compose** (para Linux)
+* **WSL2** (si estás en Windows)
 
-Docker Desktop (para Mac/Windows) o Docker Engine + Docker Compose (para Linux)
+> **NOTA:** ¡No necesitas instalar PHP, Composer o Node.js en tu máquina! Docker y Sail se encargan de todo.
 
-WSL2 (si estás en Windows)
+---
 
-NOTA: ¡No necesitas instalar PHP, Composer o Node.js en tu máquina! Docker y Sail se encargan de todo.
+### Paso 1: Clonar e Instalar Dependencias de PHP
 
-Paso 1: Clonar e Instalar Dependencias de PHP
-Clona el repositorio:
+1.  **Clona el repositorio:**
+    *(Reemplaza `tu-usuario/meily-ghost-laravel.git` por la URL de tu repo)*
+    ```bash
+    git clone [https://github.com/tu-usuario/meily-ghost-laravel.git](https://github.com/tu-usuario/meily-ghost-laravel.git)
+    cd meily-ghost-laravel
+    ```
 
-cd meily-ghost-laravel
-Copia el archivo de entorno:
+2.  **Copia el archivo de entorno:**
+    ```bash
+    cp .env.example .env
+    ```
+    *(Este archivo `.env.example` ya está configurado para funcionar con Sail).*
 
+3.  **Instala las dependencias de Composer:**
+    *(Usamos una imagen de Docker temporal para instalar `vendor/`, lo que nos dará acceso al script de `sail`).*
+    ```bash
+    docker run --rm \
+        -v "$(pwd)":/app \
+        composer/composer:latest install --ignore-platform-reqs
+    ```
 
-cp .env.example .env
-(Este archivo .env.example ya está configurado para funcionar con Sail).
+### Paso 2: Levantar el Backend y la Base de Datos
 
-Instala las dependencias de Composer: Usamos una imagen de Docker temporal de Composer para instalar vendor/, lo que nos dará acceso al script de sail.
+Ahora que tienes la carpeta `vendor/`, puedes usar el alias de Sail.
 
+1.  **Inicia los servicios de Sail:**
+    *(Esto levantará los contenedores de PHP, MariaDB y Mailpit en segundo plano).*
+    ```bash
+    ./vendor/bin/sail up -d
+    ```
 
+2.  **Genera la llave de la aplicación:**
+    ```bash
+    ./vendor/bin/sail artisan key:generate
+    ```
 
-docker run --rm \
-    -v "$(pwd)":/app \
-    composer/composer:latest install --ignore-platform-reqs
-Paso 2: Levantar el Backend y la Base de Datos
-Ahora que tienes la carpeta vendor/, puedes usar el alias de Sail.
+3.  **Ejecuta las migraciones y los seeders:**
+    *(¡Este es el paso clave!) Creará la estructura de la base de datos y la llenará con los productos de ejemplo).*
+    ```bash
+    ./vendor/bin/sail artisan migrate:fresh --seed
+    ```
 
-Inicia los servicios de Sail: (Esto levantará los contenedores de PHP, MariaDB y Mailpit en segundo plano).
+### Paso 3: Levantar el Frontend (Vite)
 
-
-
-./vendor/bin/sail up -d
-Genera la llave de la aplicación:
-
-
-
-./vendor/bin/sail artisan key:generate
-Ejecuta las migraciones y los seeders: (¡Este es el paso clave!) Creará la estructura de la base de datos y la llenará con los productos de ejemplo.
-
-
-
-./vendor/bin/sail artisan migrate:fresh --seed
-Paso 3: Levantar el Frontend (Vite)
 El backend ya está corriendo, pero los estilos (CSS) y el JavaScript (JS) necesitan compilarse con Vite.
 
-Instala las dependencias de NPM: (Esto lee tu package.json e instala Vite, Tailwind, etc., dentro del contenedor).
+1.  **Instala las dependencias de NPM:**
+    *(Esto lee tu `package.json` e instala Vite, Tailwind, etc., dentro del contenedor).*
+    ```bash
+    ./vendor/bin/sail npm install
+    ```
 
+2.  **Inicia el servidor de Vite:**
+    *(Este comando se quedará corriendo en tu terminal para compilar tus assets).*
+    ```bash
+    ./vendor/bin/sail npm run dev
+    ```
 
+**¡Listo!** El proyecto está completamente instalado y corriendo.
 
-./vendor/bin/sail npm install
-Inicia el servidor de Vite: (Este comando se quedará corriendo en tu terminal para compilar tus assets).
+---
 
+## 🏃 Cómo Correr el Proyecto (Diariamente)
 
+Para trabajar en el proyecto, necesitarás **2 terminales abiertas** en la carpeta del proyecto.
 
-./vendor/bin/sail npm run dev
-¡Listo! El proyecto está completamente instalado y corriendo.
+* **Terminal 1: Backend (Sail)**
+    Levanta todos los servicios de Docker (PHP, DB, etc.).
+    ```bash
+    ./vendor/bin/sail up
+    ```
+    *(Déjala corriendo. Verás los logs del servidor aquí).*
 
-🏃 Cómo Correr el Proyecto (Diariamente)
-Para trabajar en el proyecto, necesitarás 2 terminales abiertas en la carpeta del proyecto.
+* **Terminal 2: Frontend (Vite)**
+    Inicia el servidor de desarrollo que compila tu CSS y JS en tiempo real.
+    ```bash
+    ./vendor/bin/sail npm run dev
+    ```
+    *(Déjala corriendo. Verás los logs de Vite aquí).*
 
-Terminal 1: Backend (Sail) Levanta todos los servicios de Docker (PHP, DB, etc.).
+---
 
+## 🌎 URLs Útiles
 
+* **Sitio Web:** `http://localhost`
+* **Bandeja de Emails (Mailpit):** `http://localhost:8025`
+    *(Aquí puedes ver todos los correos de prueba, como los de recuperación y verificación).*
 
-./vendor/bin/sail up
-(Déjala corriendo. Verás los logs del servidor aquí).
+---
 
-Terminal 2: Frontend (Vite) Inicia el servidor de desarrollo que compila tu CSS y JS en tiempo real.
+## 💻 Tech Stack (Documentación Técnica)
 
+### Backend (El Cerebro)
 
+* **PHP:** El lenguaje de programación principal en el que está escrito el proyecto.
+* **Laravel:** El framework de PHP que nos da la estructura (rutas, controladores, modelos).
+* **Artisan:** La herramienta de línea de comandos de Laravel para `migrate`, `db:seed`, etc.
+* **Eloquent ORM:** El sistema que usa Laravel para hablar con la base de datos (ej. `Producto.php`, `User.php`).
+* **Blade:** El motor de plantillas de Laravel para escribir HTML con PHP (ej. `tienda.blade.php`).
+* **Composer:** El gestor de dependencias de PHP.
 
-./vendor/bin/sail npm run dev
-(Déjala corriendo. Verás los logs de Vite aquí).
+### Frontend (Lo que ve el Usuario)
 
-URLs Útiles
+* **Vite:** El compilador de frontend para JavaScript y CSS.
+* **Tailwind CSS:** El framework de CSS para diseño rápido con clases de utilidad.
+* **Node.js / NPM:** El gestor de dependencias de frontend.
+* **Alpine.js:** (Instalado por Breeze) Un mini-framework de JavaScript para interactividad simple.
 
-Sitio Web(host local por ahora hasta alquilar un hosting): http://localhost
+### Entorno y Paquetes
 
-Bandeja de Emails : jm5372533@gmail.com
+* **Docker / Docker Compose:** El software que virtualiza el entorno de desarrollo en contenedores.
+* **Laravel Sail:** La capa de Laravel que gestiona Docker y nos da el comando `./vendor/bin/sail`.
+* **Laravel Breeze:** El paquete de inicio que nos dio todo el código de autenticación y perfil.
 
-Documentacion Tecnica:
-
-
-Tecnologías de Backend (El Cerebro)
-
-PHP: Es el lenguaje de programación principal en el que está escrito todo tu proyecto.
-Laravel: Es el framework de PHP que usas. Te da toda la estructura para rutas, controladores, modelos y mucho más. Es el "esqueleto" de tu aplicación.
-Artisan: Es la herramienta de línea de comandos de Laravel (el archivo artisan). La usas para ejecutar comandos como migrate, db:seed, key:generate, etc.
-Eloquent ORM: Es el sistema que usa Laravel para hablar con la base de datos. Te permite escribir código PHP (ej. Producto::all()) en lugar de SQL. Tus Modelos (Producto.php, User.php, etc.) son la prueba de que lo usas.
-Blade: Es el motor de plantillas de Laravel. Es lo que te permite escribir HTML con sintaxis de PHP como @extends, @section y {{ $variable }}.
-Composer: Es tu gestor de dependencias de PHP. El archivo composer.json le dice a Composer qué paquetes de PHP instalar (como laravel/framework y laravel/breeze).
-
-Tecnologías de Frontend (Lo que ve el Usuario)
-
-Vite: Es tu "compilador" de frontend. Toma tus archivos de JavaScript y CSS modernos y los empaqueta para que el navegador los entienda. Está configurado en vite.config.js.
-Tailwind CSS: Es el framework de CSS que usa Breeze. Te permite diseñar rápidamente usando clases de utilidad (como text-lg, font-bold) directamente en tu HTML. Está configurado en tailwind.config.js.
-Node.js / NPM: Es el "Composer" del frontend. package.json es el archivo que lista las dependencias de JavaScript (como vite y tailwindcss).
-Alpine.js: (Probablemente) Breeze instala esto por defecto. Es un mini-framework de JavaScript para añadir interactividad simple (como mostrar/ocultar menús desplegables) directamente en tu HTML.
-
-Tecnologías de Entorno y Paquetes
-
-Docker / Docker Compose: Es el software que te permite "virtualizar" tu entorno de desarrollo. En lugar de instalar PHP, MariaDB y un servidor web en tu máquina, Docker los corre en "contenedores" aislados.
-Laravel Sail: Es la capa de Laravel que gestiona Docker por ti. El archivo compose.yaml es la "receta" que Sail usa para decirle a Docker Compose qué contenedores levantar (php, mariadb, mailpit, etc.). El comando ./vendor/bin/sail es tu forma de interactuar con él.
-Laravel Breeze: Como ya vimos, es el paquete de inicio (instalado vía Composer) que te dio todo el código de autenticación y perfil.
-.
+---
 
