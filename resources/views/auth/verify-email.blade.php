@@ -28,4 +28,36 @@
             </button>
         </form>
     </div>
+    @php
+        // Obtenemos la URL a la que el usuario quería ir (si existe)
+        // Si no, lo mandamos al dashboard (que redirige a tu CRUD)
+        $redirectUrl = session('url.intended', route('dashboard'));
+    @endphp
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Pregunta al servidor cada 3 segundos
+            const interval = setInterval(function () {
+                
+                fetch('{{ route("auth.status") }}', {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest', // Importante para Laravel
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Si el servidor dice "verified: true"...
+                    if (data.verified) {
+                        clearInterval(interval); // Deja de preguntar
+                        // Redirige esta misma pestaña a donde el usuario quería ir
+                        window.location.href = '{{ $redirectUrl }}';
+                    }
+                })
+                .catch(() => {
+                    // Si hay un error (ej. se cerró sesión), deja de preguntar
+                    clearInterval(interval);
+                });
+
+            }, 3000); // 3000ms = 3 segundos
+        });
+    </script>
 </x-guest-layout>

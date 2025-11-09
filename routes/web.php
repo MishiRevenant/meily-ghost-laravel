@@ -40,6 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::resource('productos', ProductoCrudController::class);
     });
+    Route::get('/auth/status', function () {
+        $user = auth()->user();
+        return response()->json([
+            'verified' => $user && $user->hasVerifiedEmail()
+        ]);
+    })->name('auth.status');
 
 });
 
