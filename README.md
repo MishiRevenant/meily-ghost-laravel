@@ -1,4 +1,13 @@
 
+<br>
+<p align="center">
+  <h1>Meily Ghost E-Commerce 👻</h1>
+</p>
+
+<p align="center">
+  Una tienda e-commerce de estilo gótico, victoriano y kawaii construida con Laravel 11, Sail y Vite.
+</p>
+
 ---
 
 ## 🚀 Instalación (Desde Cero)
@@ -194,12 +203,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-<br>
-<p align="center">
-  <h1>Meily Ghost E-Commerce 👻</h1>
-</p>
-
-<p align="center">
-  Una tienda e-commerce de estilo gótico, victoriano y kawaii construida con Laravel 11, Sail y Vite.
-</p>
