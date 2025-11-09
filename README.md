@@ -88,9 +88,9 @@ Asegúrate de tener instalado el siguiente software en tu sistema:
 ### Paso 1: Clonar e Instalar Dependencias de PHP
 
 1.  **Clona el repositorio:**
-    *(Reemplaza `tu-usuario/meily-ghost-laravel.git` por la URL de tu repo)*
+    
     ```bash
-    git clone [https://github.com/tu-usuario/meily-ghost-laravel.git](https://github.com/tu-usuario/meily-ghost-laravel.git)
+    git clone [https://github.com/MishiRevenant/meily-ghost-laravel.git](https://github.com/MishiRevenant/meily-ghost-laravel.git)
     cd meily-ghost-laravel
     ```
 
