@@ -113,8 +113,8 @@ Para trabajar en el proyecto, necesitarás **2 terminales abiertas** en la carpe
 ## 🌎 URLs Útiles
 
 * **Sitio Web:** `http://localhost`
-* **Bandeja de Emails (Mailpit):** `http://localhost:8025`
-    *(Aquí puedes ver todos los correos de prueba, como los de recuperación y verificación).*
+* **Bandeja de Emails :** `jm5372533@gmail.com`
+    
 
 ---
 
