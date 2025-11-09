@@ -12,6 +12,7 @@ return new class extends Migration
     // Busca el archivo ...create_users_table.php existente y modifícalo
 public function up(): void
 {
+    // Este bloque ya lo tenías
     Schema::create('users', function (Blueprint $table) {
         $table->id();
         $table->string('name');
@@ -22,8 +23,26 @@ public function up(): void
         $table->rememberToken();
         $table->timestamps();
     });
-}
 
+    // ¡AÑADE ESTE BLOQUE!
+    // Esta es la tabla que te falta para "recuperar contraseña"
+    Schema::create('password_reset_tokens', function (Blueprint $table) {
+        $table->string('email')->primary();
+        $table->string('token');
+        $table->timestamp('created_at')->nullable();
+    });
+
+    // ¡AÑADE ESTE BLOQUE TAMBIÉN!
+    // Esta tabla es para manejar las sesiones (tu 'down()' también la incluye)
+    Schema::create('sessions', function (Blueprint $table) {
+        $table->string('id')->primary();
+        $table->foreignId('user_id')->nullable()->index();
+        $table->string('ip_address', 45)->nullable();
+        $table->text('user_agent')->nullable();
+        $table->longText('payload');
+        $table->integer('last_activity')->index();
+    });
+}
     /**
      * Reverse the migrations.
      */
