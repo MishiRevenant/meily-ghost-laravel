@@ -15,6 +15,9 @@ class Tienda extends Model
         'nombre_tienda',
         'logo_path',
         'slug',
+        'color_primario',     // <-- AÑADIR
+        'color_secundario',   // <-- AÑADIR
+        'descripcion_corta',  // <-- AÑADIR
     ];
 
     // Una tienda pertenece a UN usuario (El Dueño)

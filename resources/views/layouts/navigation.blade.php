@@ -29,6 +29,9 @@
         <x-nav-link :href="route('estilos.index')" :active="request()->routeIs('estilos.*')">
             {{ __('Gestionar Estilos') }}
         </x-nav-link>
+        <x-nav-link :href="route('tienda.edit')" :active="request()->routeIs('tienda.edit')">
+            {{ __('Personalizar Tienda') }}
+        </x-nav-link>
     </div>
 @endrole
             <!-- Settings Dropdown -->
@@ -94,6 +97,9 @@
     </x-responsive-nav-link>
     <x-responsive-nav-link :href="route('estilos.index')" :active="request()->routeIs('estilos.*')">
         {{ __('Gestionar Estilos') }}
+    </x-responsive-nav-link>
+    <x-responsive-nav-link :href="route('tienda.edit')" :active="request()->routeIs('tienda.edit')">
+    {{ __('Personalizar Tienda') }}
     </x-responsive-nav-link>
 @endrole
         <!-- Responsive Settings Options -->

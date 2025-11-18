@@ -9,35 +9,12 @@ use Illuminate\Auth\Access\Response;
 class EstiloPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Estilo $estilo): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return false;
-    }
-
-    /**
      * Determine whether the user can update the model.
      */
     public function update(User $user, Estilo $estilo): bool
     {
-        return false;
+        // El usuario solo puede actualizar si el estilo es de SU tienda
+        return $user->tienda->id === $estilo->tienda_id;
     }
 
     /**
@@ -45,22 +22,7 @@ class EstiloPolicy
      */
     public function delete(User $user, Estilo $estilo): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Estilo $estilo): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Estilo $estilo): bool
-    {
-        return false;
+        // El usuario solo puede borrar si el estilo es de SU tienda
+        return $user->tienda->id === $estilo->tienda_id;
     }
 }

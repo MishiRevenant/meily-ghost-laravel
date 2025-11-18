@@ -11,7 +11,8 @@ class StoreEstiloRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // La ruta ya está protegida por el middleware de rol
+        return true;
     }
 
     /**
@@ -22,7 +23,7 @@ class StoreEstiloRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|max:255',
         ];
     }
 }

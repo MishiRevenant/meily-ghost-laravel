@@ -7,8 +7,8 @@ use App\Models\Producto;
 use App\Policies\ProductoPolicy;
 use App\Models\Categoria;
 use App\Policies\CategoriaPolicy;
-// use App\Models\Estilo;  // (Lo usaremos en el siguiente paso)
-// use App\Policies\EstiloPolicy; // (Lo usaremos en el siguiente paso)
+use App\Models\Estilo;          // <-- AÑADE ESTA LÍNEA
+use App\Policies\EstiloPolicy; // <-- AÑADE ESTA LÍNEA
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         // --- ¡AQUÍ ES DONDE REGISTRAMOS LAS POLICIES! ---
         Producto::class => ProductoPolicy::class,
         Categoria::class => CategoriaPolicy::class,
-        // Estilo::class => EstiloPolicy::class, // (Lo añadiremos en el siguiente paso)
+        Estilo::class => EstiloPolicy::class, // <-- AÑADE ESTA LÍNEA
     ];
 
     /**

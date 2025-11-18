@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaCrudController;
 use App\Http\Controllers\EstiloCrudController;
+use App\Http\Controllers\TiendaPersonalizacionController;
+use App\Http\Controllers\PublicTiendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,10 +63,12 @@ Route::middleware(['auth', 'role:dueño_tienda'])->group(function () {
     Route::resource('/categorias', CategoriaCrudController::class);
     Route::resource('/estilos', EstiloCrudController::class);
 
-    // Ruta para personalización (la haremos después)
-    // Route::get('/personalizar-tienda', [TiendaPersonalizacionController::class, 'edit'])->name('tienda.edit');
-    // Route::patch('/personalizar-tienda', [TiendaPersonalizacionController::class, 'update'])->name('tienda.update');
+   // --- AÑADIR ESTAS DOS LÍNEAS ---
+    Route::get('/personalizar-tienda', [TiendaPersonalizacionController::class, 'edit'])->name('tienda.edit');
+    Route::patch('/personalizar-tienda', [TiendaPersonalizacionController::class, 'update'])->name('tienda.update');
+    // --- FIN ---
 });
+Route::get('/tienda/{slug}', [PublicTiendaController::class, 'show'])->name('tienda.publica.show');
 // --- FIN DEL GRUPO PROTEGIDO ---
 
 require __DIR__.'/auth.php';
