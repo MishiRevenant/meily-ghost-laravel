@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Editar Categoría') }} </h2>
+            {{ __('Editar Categoría') }}
+        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -11,7 +12,9 @@
                     
                     <form method="POST" action="{{ route('categorias.update', $categoria) }}">
                         @csrf
-                        @method('PATCH') <div>
+                        @method('PATCH')
+
+                        <div>
                             <x-input-label for="nombre" :value="__('Nombre')" />
                             <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre', $categoria->nombre)" required autofocus />
                             <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
@@ -19,7 +22,8 @@
 
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button>
-                                {{ __('Actualizar Categoría') }} </x-primary-button>
+                                {{ __('Actualizar Categoría') }}
+                            </x-primary-button>
                         </div>
                     </form>
 

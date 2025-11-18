@@ -1,73 +1,72 @@
-@extends('layouts.main')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Editar Producto') }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Admin - Editar Producto')
-@section('header-title', 'Editar: ' . $producto->nombre)
-@section('header-subtitle', 'Modifica los campos y guarda los cambios.')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    
+                    <form action="{{ route('productos.update', $producto) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                        @csrf
+                        @method('PATCH')
+                        
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+                            <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $producto->nombre) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        </div>
+                        
+                        <div>
+                            <label for="descripcion" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
+                            <textarea name="descripcion" id="descripcion" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">{{ old('descripcion', $producto->descripcion) }}</textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="precio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Precio</label>
+                            <input type="number" name="precio" id="precio" step="0.01" value="{{ old('precio', $producto->precio) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        </div>
+                        
+                        <div>
+                            <label for="imagen" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Imagen (dejar en blanco para no cambiar)</label>
+                            <input type="file" name="imagen" id="imagen" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                            <img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" class="h-20 w-auto rounded mt-2">
+                        </div>
+                        
+                        <div>
+                            <label for="categoria_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Categoría</label>
+                            <select name="categoria_id" id="categoria_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <option value="">Selecciona una categoría</option>
+                                @foreach (auth()->user()->tienda->categorias as $categoria)
+                                    <option value="{{ $categoria->id }}" @selected(old('categoria_id', $producto->categoria_id) == $categoria->id)>
+                                        {{ $categoria->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="estilo_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Estilo</label>
+                            <select name="estilo_id" id="estilo_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <option value="">Selecciona un estilo</option>
+                                @foreach (auth()->user()->tienda->estilos as $estilo)
+                                    <option value="{{ $estilo->id }}" @selected(old('estilo_id', $producto->estilo_id) == $estilo->id)>
+                                        {{ $estilo->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-@section('content')
-<section class="main-section contact-form-section">
-    <form action="{{ route('productos.update', $producto) }}" method="POST" enctype="multipart/form-data" class="contact-form" style="max-width: 800px; margin: auto;">
-        @csrf
-        @method('PUT') {{-- Importante para actualizar --}}
-
-        @if ($errors->any())
-            <div style="color: #ff6666; background: #3b2a2a; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-                <strong>¡Ups! Hubo un problema:</strong>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                        <div class="flex justify-end">
+                            <x-primary-button>
+                                Actualizar Producto
+                            </x-primary-button>
+                        </div>
+                    </form>
+                    </div>
             </div>
-        @endif
-
-        <div class="form-group">
-            <label for="nombre">Nombre del Producto:</label>
-            <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $producto->nombre) }}" required>
         </div>
-
-        <div class="form-group">
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" rows="5">{{ old('descripcion', $producto->descripcion) }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="precio">Precio (S/):</label>
-            <input type="number" step="0.01" id="precio" name="precio" value="{{ old('precio', $producto->precio) }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="estilo_id">Estilo:</label>
-            <select name="estilo_id" id="estilo_id">
-                <option value="">-- Sin Estilo --</option>
-                @foreach($estilos as $estilo)
-                    <option value="{{ $estilo->id }}" @if($estilo->id == old('estilo_id', $producto->estilo_id)) selected @endif>
-                        {{ $estilo->nombre }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="categoria_id">Categoría:</label>
-            <select name="categoria_id" id="categoria_id">
-                <option value="">-- Sin Categoría --</option>
-                @foreach($categorias as $categoria)
-                    <option value="{{ $categoria->id }}" @if($categoria->id == old('categoria_id', $producto->categoria_id)) selected @endif>
-                        {{ $categoria->nombre }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="imagen">Imagen del Producto (Opcional: Subir una nueva reemplaza la anterior):</label>
-            <input type="file" id="imagen" name="imagen">
-            <p style="color: #999; font-size: 0.9em;">Actual:</p>
-            <img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" width="100">
-        </div>
-
-        <button type="submit" class="submit-btn">Actualizar Producto</button>
-    </form>
-</section>
-@endsection
+    </div>
+</x-app-layout>

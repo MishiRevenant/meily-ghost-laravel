@@ -1,57 +1,58 @@
-@extends('layouts.main')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Gestionar Productos') }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Admin - Productos')
-@section('header-title', 'Administrar Productos')
-@section('header-subtitle', 'Aquí puedes ver, crear, editar y eliminar productos.')
-
-@section('content')
-<section class="main-section">
-    <div style="margin-bottom: 20px; text-align: right;">
-        <a href="{{ route('productos.create') }}" class="submit-btn" style="text-decoration: none;">Crear Nuevo Producto</a>
-    </div>
-
-    @if(session('success'))
-        <div style="color: #66ff66; background: #2a3b2a; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-            {{ session('success') }}
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    
+                    <div class="container mx-auto px-4 py-8">
+                        <h1 class="text-3xl font-bold mb-6">Listado de Productos</h1>
+                        
+                        <a href="{{ route('productos.create') }}" class="mb-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
+                            Crear Nuevo Producto
+                        </a>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nombre</th>
+                                        <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Descripción</th>
+                                        <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Precio</th>
+                                        <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Imagen</th>
+                                        <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                    @foreach ($productos as $producto)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $producto->nombre }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ Str::limit($producto->descripcion, 50) }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">S/ {{ $producto->precio }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" class="h-10 w-10 object-cover rounded">
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <a href="{{ route('productos.edit', $producto) }}" class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                                                <form action="{{ route('productos.destroy', $producto) }}" method="POST" class="inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Eliminar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+            </div>
         </div>
-    @endif
-
-    <div class="admin-table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Estilo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($productos as $producto)
-                    <tr>
-                        <td>{{ $producto->id }}</td>
-                        <td><img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" width="50"></td>
-                        <td>{{ $producto->nombre }}</td>
-                        <td>S/ {{ $producto->precio }}</td>
-                        <td>{{ $producto->estilo->nombre ?? 'N/A' }}</td>
-                        <td>
-                            <a href="{{ route('productos.edit', $producto) }}" class="btn-edit">Editar</a>
-                            <form action="{{ route('productos.destroy', $producto) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-delete">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" style="text-align: center;">No hay productos.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
     </div>
-</section>
-@endsection
+</x-app-layout>

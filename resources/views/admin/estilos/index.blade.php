@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Gestionar Categorías') }} </h2>
+            {{ __('Gestionar Estilos') }}
+        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -10,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <a href="{{ route('estilos.create') }}" class="mb-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
-                        Crear Nueva Categoría
+                        Crear Nuevo Estilo
                     </a>
                     
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">

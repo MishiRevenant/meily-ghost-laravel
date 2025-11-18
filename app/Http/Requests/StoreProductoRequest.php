@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule; // <-- ¡ASEGÚRATE DE IMPORTAR ESTO!
 
 class StoreProductoRequest extends FormRequest
 {
@@ -11,8 +12,6 @@ class StoreProductoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Ya estamos protegiendo la ruta con 'role:dueño_tienda', 
-        // así que aquí podemos simplemente retornar true.
         return true; 
     }
 
@@ -23,13 +22,35 @@ class StoreProductoRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Obtenemos el ID de la tienda del usuario logueado
+        $tiendaId = auth()->user()->tienda->id;
+
+        // Hacemos la regla de la imagen "condicional"
+        // Requerida si es 'POST' (crear), opcional si es 'PATCH' (actualizar)
+        $imagenRule = 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048';
+        if ($this->isMethod('POST')) {
+            $imagenRule = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
+        }
+
         return [
             'nombre' => 'required|string|max:255',
-            'descripcion' => 'nullable|string', // Respetando tu lógica original
+            'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Tu validación de imagen
-            'categoria_id' => 'nullable|exists:categorias,id', // Respetando tu lógica original
-            'estilo_id' => 'nullable|exists:estilos,id', // Respetando tu lógica original
+            'imagen' => $imagenRule, // <-- Regla de imagen actualizada
+            
+            // ¡LA REGLA CORREGIDA!
+            'categoria_id' => [
+                'nullable', 
+                // "Verifica que la categoria_id exista EN la tabla 'categorias',
+                // pero SÓLO donde la 'tienda_id' sea la de mi tienda"
+                Rule::exists('categorias', 'id')->where('tienda_id', $tiendaId)
+            ],
+            
+            // ¡LA REGLA CORREGIDA!
+            'estilo_id' => [
+                'nullable', 
+                Rule::exists('estilos', 'id')->where('tienda_id', $tiendaId)
+            ]
         ];
     }
 }

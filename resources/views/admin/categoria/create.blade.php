@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Crear Nueva Categoría') }} </h2>
+            {{ __('Crear Nueva Categoría') }}
+        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -20,7 +21,8 @@
 
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button>
-                                {{ __('Guardar Categoría') }} </x-primary-button>
+                                {{ __('Guardar Categoría') }}
+                            </x-primary-button>
                         </div>
                     </form>
 
