@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tienda_id')->constrained('tiendas')->onDelete('cascade');
             $table->string('nombre', 255);
             $table->text('descripcion')->nullable();
             $table->string('imagen_url', 255);

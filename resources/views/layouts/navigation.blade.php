@@ -17,7 +17,20 @@
                     </x-nav-link>
                 </div>
             </div>
-
+@role('dueño_tienda')
+    <div class="hidden sm:flex sm:items-center sm:ms-6">
+         <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+            {{ __('Gestionar Productos') }}
+        </x-nav-link>
+        
+        <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.*')">
+            {{ __('Gestionar Categorías') }}
+        </x-nav-link>
+        <x-nav-link :href="route('estilos.index')" :active="request()->routeIs('estilos.*')">
+            {{ __('Gestionar Estilos') }}
+        </x-nav-link>
+    </div>
+@endrole
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -71,7 +84,18 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+@role('dueño_tienda')
+    <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+        {{ __('Gestionar Productos') }}
+    </x-responsive-nav-link>
 
+    <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.*')">
+        {{ __('Gestionar Categorías') }}
+    </x-responsive-nav-link>
+    <x-responsive-nav-link :href="route('estilos.index')" :active="request()->routeIs('estilos.*')">
+        {{ __('Gestionar Estilos') }}
+    </x-responsive-nav-link>
+@endrole
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">

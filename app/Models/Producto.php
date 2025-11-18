@@ -20,6 +20,10 @@ class Producto extends Model
         'categoria_id',
         'estilo_id',
     ];
+    public function tienda()
+{
+    return $this->belongsTo(Tienda::class);
+}
 
     /**
      * Define la relación: un Producto pertenece a un Estilo.

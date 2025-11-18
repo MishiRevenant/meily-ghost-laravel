@@ -13,7 +13,10 @@ class Estilo extends Model
      * Los campos que se pueden llenar masivamente.
      */
     protected $fillable = ['nombre'];
-
+public function tienda()
+{
+    return $this->belongsTo(Tienda::class);
+}
     /**
      * Define la relación: un Estilo tiene muchos Productos.
      */

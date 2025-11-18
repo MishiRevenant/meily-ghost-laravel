@@ -5,6 +5,8 @@ use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\ProductoCrudController; // <-- La línea que añadimos
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaCrudController;
+use App\Http\Controllers\EstiloCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +50,21 @@ Route::middleware('auth')->group(function () {
     })->name('auth.status');
 
 });
+// --- ¡AQUÍ ESTÁ LA MAGIA! ---
+// Este grupo protege todo lo que está adentro
+Route::middleware(['auth', 'role:dueño_tienda'])->group(function () {
+
+    // Tus rutas de CRUD ahora están protegidas
+    Route::resource('/productos', ProductoCrudController::class);
+
+    // Cuando crees los otros CRUDs, irán aquí también
+    Route::resource('/categorias', CategoriaCrudController::class);
+    Route::resource('/estilos', EstiloCrudController::class);
+
+    // Ruta para personalización (la haremos después)
+    // Route::get('/personalizar-tienda', [TiendaPersonalizacionController::class, 'edit'])->name('tienda.edit');
+    // Route::patch('/personalizar-tienda', [TiendaPersonalizacionController::class, 'update'])->name('tienda.update');
+});
+// --- FIN DEL GRUPO PROTEGIDO ---
 
 require __DIR__.'/auth.php';
