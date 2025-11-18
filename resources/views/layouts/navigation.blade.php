@@ -91,6 +91,7 @@
     <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
         {{ __('Gestionar Productos') }}
     </x-responsive-nav-link>
+    
 
     <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.*')">
         {{ __('Gestionar Categorías') }}
