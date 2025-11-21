@@ -63,6 +63,19 @@
             </div>
         </div>
     </div>
+    @if (Auth::user()->is_admin)
+    <!-- Solo el Admin ve esto -->
+    <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+        {{ __('Panel de Admin') }}
+    </x-nav-link>
+@endif
+
+<!-- Todos ven esto -->
+<x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+    {{ __('Ir a la Tienda') }}
+</x-nav-link>
+
+<!-- ... -->
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
