@@ -32,7 +32,7 @@
 
             // Llama a tus otros seeders si los tienes (Productos, etc.)
             $this->call([
-               // ProductoSeeder::class, 
+             ProductoSeeder::class, 
             ]);
         }
     }

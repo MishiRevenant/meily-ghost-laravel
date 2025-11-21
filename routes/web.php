@@ -37,9 +37,11 @@ Route::middleware('auth')->group(function () {
     // ¡ESTA ES LA LÍNEA QUE FALTABA!
     // Crea todas las rutas del CRUD (index, create, store, edit, update, destroy)
     // y las protege para que solo usuarios logueados puedan entrar.
-    Route::prefix('admin')->group(function () {
-        Route::resource('productos', ProductoCrudController::class);
-    });
+    Route::prefix('admin')
+        ->middleware('admin') // <--- ESTO ES LO QUE FALTABA
+        ->group(function () {
+            Route::resource('productos', ProductoCrudController::class);
+        });
     Route::get('/auth/status', function () {
         $user = auth()->user();
         return response()->json([
