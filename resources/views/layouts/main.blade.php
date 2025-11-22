@@ -56,7 +56,7 @@
         &copy; {{ date('Y') }} Meily Ghost - Todos los derechos reservados 👻
     </footer>
 </div>
-
+@stack('scripts') {{-- <--- IMPORTANTE: Aquí se inyectará el script del slider --}}
 <script src="{{ asset('js/slider.js') }}"></script>
 <script src="{{ asset('js/sidebar.js') }}"></script>
 <script src="{{ asset('js/tienda.js') }}"></script>
