@@ -36,7 +36,7 @@
 
 <div class="content-wrapper relative z-0">
     <header class="text-center mb-8 mt-4"> {{-- Clases Tailwind para asegurar centrado --}}
-        <img src="https://scontent.fcuz2-1.fna.fbcdn.net/v/t39.30808-6/468179592_122102996726635106_5745478641582667610_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHVt_FllllmyBB5VlUhmO4gdseUeWaA-Gh2x5R5ZoD4aLMW9achCdVtVYkuKAG7UVVcdT0i6dhUkARw6sDMxivu&_nc_ohc=QvtAWQhtXkwQ7kNvwHVWxY4&_nc_oc=AdnAlL4J_Ox_QBwXVPFf7Utm0hq98dpit4YAMCgq83MGXdO2Btod6grjCdcIz9TChwE&_nc_zt=23&_nc_ht=scontent.fcuz2-1.fna&_nc_gid=6dfCk1yQ6JYFUhS2aS_KYA&oh=00_Afhl7ONrk5wAaG9GyeuFww-gkK35MpYGDFbWAx-Owtu0yA&oe=6914ACE3" 
+        <img src="{{ asset('img/logo.jpeg') }}" 
              alt="Meily Ghost Logo"
              class="mx-auto block w-40 h-auto drop-shadow-[0_0_10px_rgba(236,72,153,0.5)] hover:scale-105 transition-transform duration-300"> {{-- Efecto de brillo rosa y zoom suave --}}
         

@@ -27,4 +27,9 @@ class TiendaController extends Controller
             'productos' => $productos
         ]);
     }
+    public function show($id)
+    {
+        $producto = Producto::with(['categoria', 'estilo'])->findOrFail($id);
+        return view('producto.detalle', compact('producto'));
+    }
 }

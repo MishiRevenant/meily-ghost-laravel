@@ -16,6 +16,7 @@ use App\Http\Controllers\ContactoController; // <-- No olvides importar esto arr
 // --- RUTAS PÚBLICAS DE MEILY GHOST ---
 Route::get('/', function () { return view('index'); })->name('home');
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
+Route::get('/producto/{id}', [TiendaController::class, 'show'])->name('producto.detalle'); 
 Route::get('/inspiracion', function () { return view('inspiracion'); })->name('inspiracion');
 Route::get('/acerca', function () { return view('acerca'); })->name('acerca');
 Route::get('/contacto', function () { return view('contacto'); })->name('contacto');
