@@ -90,7 +90,7 @@ body::after {
         42vw 35vh #fff, 18vw 75vh #111;
         
     /* Animación más lenta y desfasada para la segunda capa */
-    animation: twinkle 1s infinite alternate-reverse; 
+    animation: twinkle s infinite alternate-reverse; 
     z-index: -1;
     /* Blur muy leve para que brillen */
     filter: blur(1px); 
@@ -754,4 +754,95 @@ nav a:hover::after, nav a.active::after {
 .submit-btn:hover {
     background: #ccc;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+/* --- RESPONSIVIDAD MÓVIL (Agrega esto al final de style.css) --- */
+
+/* Botón de menú móvil (oculto en PC, visible en móvil) */
+#mobile-menu-btn {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001; /* Encima del sidebar */
+    background: #6045d3aa;
+    color: #ffe766;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #000;
+    transition: background 0.3s;
+}
+
+#mobile-menu-btn:hover {
+    background: #6045d3;
+}
+
+@media (max-width: 768px) {
+    /* 1. Mostrar el botón de menú */
+    #mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 2. Ajustar el Layout Principal */
+    .main-layout {
+        margin-left: 0 !important; /* Quitar margen izquierdo */
+        width: 100%;
+        padding-top: 50px; /* Espacio para el botón del menú */
+    }
+
+    /* 3. Sidebar oculto por defecto (estilo "Cajón") */
+    .sidebar {
+        width: 240px; /* Más ancho para tocar fácil con el dedo */
+        transform: translateX(-100%); /* Mover fuera de la pantalla */
+        transition: transform 0.3s ease-in-out;
+        background: #191927fa; /* Fondo sólido para que no se vea lo de atrás */
+        box-shadow: 5px 0 20px #000000aa;
+    }
+
+    /* Clase para cuando el menú está abierto */
+    .sidebar.mobile-open {
+        transform: translateX(0); /* Traer de vuelta a la pantalla */
+    }
+
+    /* Asegurar que los textos del menú se vean */
+    .sidebar span {
+        opacity: 1; 
+        display: inline;
+    }
+    
+    .sidebar a {
+        justify-content: flex-start; /* Alinear a la izquierda */
+        padding-left: 20px;
+    }
+
+    /* 4. Ajustes del Slider y Header */
+    .slider-coraline {
+        width: 95vw;
+        min-height: 250px; /* Menos altura en celular */
+    }
+    
+    header img {
+        width: 100px; /* Logo más pequeño */
+    }
+    
+    header h1 {
+        font-size: 2rem; /* Título más pequeño */
+        line-height: 1.2;
+    }
+
+    /* 5. Ajuste de Grillas (Productos) */
+    /* Cambiamos tu regla de 800px para que permita 2 columnas en tablets pequeñas si caben */
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Tarjetas más pequeñas en móvil */
+        gap: 15px;
+    }
+    
+    .product-card {
+        min-width: auto; /* Permitir que se encoja */
+    }
 }

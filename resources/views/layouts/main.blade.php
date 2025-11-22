@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">    
 </head>
 <body class="font-sans antialiased main-layout text-gray-100"> 
+<button id="mobile-menu-btn">
+    <i class="fas fa-bars"></i>
+</button>
 
 <nav id="sidebar" class="sidebar z-50"> {{-- Añadí z-50 para que siempre esté encima --}}
     <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}"><i class="fas fa-home"></i><span>Inicio</span></a>
@@ -154,5 +157,35 @@
 <script src="{{ asset('js/slider.js') }}"></script>
 <script src="{{ asset('js/sidebar.js') }}"></script>
 <script src="{{ asset('js/tienda.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const icon = mobileBtn.querySelector('i');
+
+        mobileBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evitar que el clic se propague
+            sidebar.classList.toggle('mobile-open');
+            
+            // Cambiar icono
+            if (sidebar.classList.contains('mobile-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times'); // Cambia a X
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars'); // Cambia a hamburguesa
+            }
+        });
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', function(e) {
+            if (sidebar.classList.contains('mobile-open') && !sidebar.contains(e.target) && e.target !== mobileBtn) {
+                sidebar.classList.remove('mobile-open');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+</script>
 </body>
 </html>
