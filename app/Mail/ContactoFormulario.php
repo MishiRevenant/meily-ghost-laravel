@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -13,39 +12,29 @@ class ContactoFormulario extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $datos; // Aquí guardaremos la info del formulario
+
+    public function __construct($datos)
     {
-        //
+        $this->datos = $datos;
     }
 
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Contacto Formulario',
+            subject: 'Nuevo Mensaje de Contacto - Meily Ghost: ' . $this->datos['asunto'],
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
+        // Usaremos una vista simple inline para no crear otro archivo si no quieres
+        // O creamos la vista emails.contacto abajo.
         return new Content(
-            view: 'view.name',
+            view: 'emails.contacto', 
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
         return [];

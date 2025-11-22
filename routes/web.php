@@ -5,6 +5,7 @@ use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\ProductoCrudController; // <-- La línea que añadimos
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactoController; // <-- No olvides importar esto arriba
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ Route::get('/inspiracion', function () { return view('inspiracion'); })->name('i
 Route::get('/acerca', function () { return view('acerca'); })->name('acerca');
 Route::get('/contacto', function () { return view('contacto'); })->name('contacto');
 
+Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 // --- RUTAS DE AUTENTICACIÓN ---
 
 // Esta es la ruta que te redirige al CRUD después de iniciar sesión

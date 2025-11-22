@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Meily Ghost')</title>
+    
+    {{-- 1. ESTA ES LA LÍNEA QUE FALTABA (Conecta Tailwind/Breeze) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     {{-- La función asset() genera la URL correcta a la carpeta public --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    {{-- Scripts de Vite (para Breeze) y tus estilos --}}
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">    
+    
+    {{-- Scripts de Vite (para Breeze) y tus estilos PERSONALIZADOS --}}
+    {{-- Al poner tu style.css AL FINAL, tus reglas personales mandan sobre Tailwind --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">    
 </head>
-<body class="font-sans antialiased main-layout"> {{-- <-- AÑADE ESTA CLASE --}}
+<body class="font-sans antialiased main-layout"> {{-- <-- Mantuve tu clase --}}
 
 <nav id="sidebar" class="sidebar">
     {{-- La función route() busca una ruta por su nombre. Aún no las creamos, pero lo haremos. --}}
@@ -18,7 +24,8 @@
     <a href="{{ route('inspiracion') }}" class="{{ request()->routeIs('inspiracion') ? 'active' : '' }}"><i class="fas fa-lightbulb"></i><span>Inspiración</span></a>
     <a href="{{ route('acerca') }}" class="{{ request()->routeIs('acerca') ? 'active' : '' }}"><i class="fas fa-info-circle"></i><span>Acerca de</span></a>
     <a href="{{ route('contacto') }}" class="{{ request()->routeIs('contacto') ? 'active' : '' }}"><i class="fas fa-envelope"></i><span>Contacto</span></a>
-    {{-- AÑADE ESTA LÓGICA DE AQUÍ --}}
+    
+    {{-- TU LÓGICA DE AUTH (INTACTA) --}}
     @auth
         {{-- Si el usuario está logueado --}}
         <a href="{{ route('dashboard') }}"><i class="fas fa-user-shield"></i><span>Dashboard</span></a>
@@ -54,8 +61,8 @@
         &copy; {{ date('Y') }} Meily Ghost - Todos los derechos reservados
     </footer>
 </div>
-<script src="{{ asset('js/slider.js') }}"></script>
+    <script src="{{ asset('js/slider.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
-    
-    <script src="{{ asset('js/tienda.js') }}"></script></body>
+    <script src="{{ asset('js/tienda.js') }}"></script>
+</body>
 </html>
