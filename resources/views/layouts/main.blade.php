@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">    
-    <link rel="icon" href="{{ asset('img/icon.jpeg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('img/icon.png') }}" type="image/x-icon">
 </head>
 <body class="font-sans antialiased main-layout text-gray-100"> 
 <button id="mobile-menu-btn">
