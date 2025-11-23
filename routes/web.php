@@ -53,5 +53,6 @@ Route::middleware('auth')->group(function () {
     })->name('auth.status');
 
 });
+Route::post('/newsletter', [ContactoController::class, 'subscribe'])->name('newsletter.subscribe');
 
 require __DIR__.'/auth.php';

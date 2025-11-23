@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">    
+    <link rel="icon" href="{{ asset('img/icon.jpeg') }}" type="image/x-icon">
 </head>
 <body class="font-sans antialiased main-layout text-gray-100"> 
 <button id="mobile-menu-btn">
@@ -131,15 +132,30 @@
                                 <i class="fab fa-facebook-f text-xl"></i>
                             </a>
                 </div>
+                
                 <div class="mt-6">
-                    <p class="text-xs text-gray-500 mb-2">Suscríbete a novedades:</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Email..." class="bg-black/30 border border-gray-700 text-white text-xs px-3 py-2 rounded-l-md focus:outline-none focus:border-pink-500 w-full">
-                        <button class="bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-r-md transition-colors">
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
-                    </form>
-                </div>
+    <p class="text-xs text-gray-500 mb-2">Suscríbete a novedades:</p>
+    
+    <form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex flex-col gap-2">
+        @csrf
+        <div class="flex">
+            <input 
+                type="email" 
+                name="email" 
+                required
+                placeholder="Email..." 
+                class="bg-black/30 border border-gray-700 text-white text-xs px-3 py-2 rounded-l-md focus:outline-none focus:border-pink-500 w-full"
+            >
+            <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-r-md transition-colors">
+                <i class="fas fa-arrow-right text-xs"></i>
+            </button>
+        </div>
+        
+        @error('email')
+            <span class="text-red-400 text-[10px]">{{ $message }}</span>
+        @enderror
+    </form>
+</div>
             </div>
         </div>
 

@@ -147,10 +147,35 @@
         <h2 class="text-3xl font-bold text-white mb-4 font-serif">Únete al Lado Oscuro</h2>
         <p class="text-gray-300 mb-8">Entérate de los nuevos lanzamientos, ofertas exclusivas y curiosidades bizarras antes que nadie.</p>
         
-        <form action="#" class="flex flex-col sm:flex-row gap-4 justify-center">
-            <input type="email" placeholder="Tu correo electrónico..." class="px-6 py-3 bg-black/50 border border-gray-600 text-white w-full sm:w-96 focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all placeholder-gray-500">
-            <button type="button" class="px-8 py-3 bg-white text-black font-bold tracking-widest hover:bg-gray-200 transition-colors uppercase">Suscribirse</button>
-        </form>
+        {{-- Añadimos method="POST" y action --}}
+<form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex flex-col sm:flex-row gap-4 justify-center">
+    @csrf {{-- ¡Importantísimo para seguridad en Laravel! --}}
+    
+    <div class="flex flex-col w-full sm:w-96 text-left">
+        <input 
+            type="email" 
+            name="email" 
+            required
+            placeholder="Tu correo electrónico..." 
+            class="px-6 py-3 bg-black/50 border border-gray-600 text-white w-full focus:outline-none focus:border-white focus:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all placeholder-gray-500"
+        >
+        {{-- Mostrar error específico de este campo --}}
+        @error('email')
+            <span class="text-red-400 text-xs mt-1">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <button type="submit" class="px-8 py-3 bg-white text-black font-bold tracking-widest hover:bg-gray-200 transition-colors uppercase h-fit">
+        Suscribirse
+    </button>
+</form>
+
+{{-- Mensaje de éxito específico para esta sección --}}
+@if (session('status'))
+    <div class="mt-4 p-4 bg-green-900/50 border border-green-500 text-green-200 rounded animate-fade-in-up">
+        {{ session('status') }}
+    </div>
+@endif
     </div>
 </section>
 

@@ -29,7 +29,7 @@
                     </p>
                     
                     <div class="border-l-4 border-pink-600 pl-4 mt-6 italic text-gray-400">
-                        "No le tengo asco a nada, a menos que sea muy malo. Lo mío es lo auténtico."
+                        "Si la mina es tan buena, por que no hay mina en la urbanizacion Mariscal Gamarra."-Emily Silvana Condori Cañari 1978-2023
                     </div>
                 </div>
             </div>
@@ -82,12 +82,12 @@
         <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-8 bg-white/5 backdrop-blur-md px-8 py-6 rounded-lg shadow-xl border border-white/10 hover:border-pink-500/50 transition duration-300">
             <div class="flex items-center gap-3">
                 <i class="fas fa-map-marker-alt text-pink-500 text-xl drop-shadow-[0_0_5px_#ec4899]"></i>
-                <span class="text-gray-300">Lima, Perú (Envíos a todo el país)</span>
+                <span class="text-gray-300">Cusco, Perú (Envíos a todo el país)</span>
             </div>
             <div class="hidden sm:block w-px h-8 bg-white/20"></div>
             <div class="flex items-center gap-3">
                 <i class="fas fa-envelope text-pink-500 text-xl drop-shadow-[0_0_5px_#ec4899]"></i>
-                <span class="text-gray-300">contacto@meilyghost.com</span>
+                <span class="text-gray-300">jm5372533@gmail.com</span>
             </div>
         </div>
         
